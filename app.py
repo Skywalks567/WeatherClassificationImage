@@ -170,7 +170,7 @@ def load_trained_model():
     try:
         model_path = repo_top / 'Model' / 'weather_classification_model.h5'
         class_names_path = repo_top / 'Model' / 'class_names.pkl'
-
+        st.write(model_path)
         model = load_model(model_path)
 
         if class_names_path.exists():
