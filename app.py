@@ -18,7 +18,7 @@ from PIL import Image
 import pickle
 import pathlib
 
-file_path = pathlib.Path(__file__).parent / "weather_classification_model.h5"
+file_path = pathlib.Path(__file__).parent
 st.write(file_path.read_text())
 # Konfigurasi halaman
 st.set_page_config(
