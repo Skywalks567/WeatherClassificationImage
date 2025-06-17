@@ -467,7 +467,7 @@ else:
         st.info(f"Python Version: {st.__version__}")
     
     with col2:
-        if os.path.exists('weather_classification_model.h5'):
+        if os.path.exists('./Model/weather_classification_model.h5'):
             st.success("Model tersedia ✅")
         else:
             st.warning("Model belum dilatih ⚠️")
