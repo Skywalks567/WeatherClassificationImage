@@ -166,7 +166,11 @@ BATCH_SIZE = 32
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
     try:
-        model = load_model('https://github.com/Skywalks567/WeatherClassificationImage/blob/main/Model/weather_classification_model.h5')
+        url = 'https://raw.githubusercontent.com/Skywalks567/WeatherClassificationImage/main/Model/weather_classification_model.h5'
+        response = requests.get(url)
+        with open("weather_classification_model.h5", "wb") as f:
+            f.write(response.content)
+        model = load_model("weather_classification_model.h5")
         # Muat class names jika tersedia
         if os.path.exists('./Model/class_names.pkl'):
             with open('./Model/class_names.pkl', 'rb') as f:
