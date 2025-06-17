@@ -165,10 +165,10 @@ BATCH_SIZE = 32
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
     try:
-        model = load_model("/Model/weather_classification_model.h5")
+        model = load_model("./Model/weather_classification_model.h5")
         # Muat class names jika tersedia
-        if os.path.exists('Model/class_names.pkl'):
-            with open('Model/class_names.pkl', 'rb') as f:
+        if os.path.exists("./Model/class_names.pkl"):
+            with open("./Model/class_names.pkl", 'rb') as f:
                 class_names = pickle.load(f)
             return model, class_names
         else:
@@ -180,7 +180,7 @@ def load_trained_model():
 
 def save_class_names(class_names):
     """Simpan class names ke file"""
-    with open('Model/class_names.pkl', 'wb') as f:
+    with open("./Model/class_names.pkl", 'wb') as f:
         pickle.dump(class_names, f)
 
 def create_model(num_classes):
