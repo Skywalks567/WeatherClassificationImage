@@ -16,7 +16,7 @@ import numpy as np
 import os
 from PIL import Image
 import pickle
-from pathlib import Path
+import pathlib
 
 file_path = pathlib.Path(__file__).parent / "weather_classification_model.h5"
 st.write(file_path.read_text())
