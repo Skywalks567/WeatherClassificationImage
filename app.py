@@ -16,7 +16,7 @@ import numpy as np
 import os
 from PIL import Image
 import pickle
-import pathlib
+from pathlib import Path
 
 # Konfigurasi halaman
 st.set_page_config(
@@ -166,8 +166,10 @@ BATCH_SIZE = 32
 @st.cache_resource
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
+    repo_top = Path(__file__ + "/..").resolve()
+    print(repo_top)
     try:
-        model = load_model("./Model/weather_classification_model.h5")
+        model = load_model(repo_top / 'weather_classification_model.h5')
         # Muat class names jika tersedia
         if os.path.exists("./Model/class_names.pkl"):
             with open("./Model/class_names.pkl", 'rb') as f:
