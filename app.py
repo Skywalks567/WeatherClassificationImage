@@ -16,7 +16,6 @@ import numpy as np
 import os
 from PIL import Image
 import pickle
-from pathlib import Path
 
 # Konfigurasi halaman
 st.set_page_config(
@@ -163,32 +162,26 @@ app_mode = st.sidebar.selectbox("Pilih Mode:",
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 32
 
-@st.cache_resource
+
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
-    repo_top = Path(__file__).resolve().parent
     try:
-        model_path = repo_top / 'Model' / 'weather_classification_model.h5'
-        class_names_path = repo_top / 'Model' / 'class_names.pkl'
-        st.write(model_path)
-        st.write("🔍 Mencoba memuat model dari:", model_path)
-        st.write("📁 Ada file model?", model_path.exists())
-        model = load_model(model_path)
-
-        if class_names_path.exists():
-            with open(class_names_path, 'rb') as f:
+        model = load_model('./Model/weather_classification_model.h5')
+        # Muat class names jika tersedia
+        if os.path.exists('./Model/class_names.pkl'):
+            with open('./Model/class_names.pkl', 'rb') as f:
                 class_names = pickle.load(f)
+            return model, class_names
         else:
+            # Default class names jika file tidak ada
             class_names = ['cloudy', 'rain', 'shine', 'sunrise']
-
-        return model, class_names
-    except Exception as e:
-        print(f"Error saat memuat model: {e}")
+            return model, class_names
+    except:
         return None, None
 
 def save_class_names(class_names):
     """Simpan class names ke file"""
-    with open("./Model/class_names.pkl", 'wb') as f:
+    with open('./Model/class_names.pkl', 'wb') as f:
         pickle.dump(class_names, f)
 
 def create_model(num_classes):
