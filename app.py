@@ -16,7 +16,7 @@ import numpy as np
 import os
 from PIL import Image
 import pickle
-import pathlib
+from pathlib import Path
 
 # Konfigurasi halaman
 st.set_page_config(
