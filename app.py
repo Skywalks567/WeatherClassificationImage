@@ -166,9 +166,8 @@ BATCH_SIZE = 32
 @st.cache_resource
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
-    model_path = pathlib.Path(__file__).parent / "Model" / "weather_classification_model.h5"
     try:
-        model = load_model(model_path)
+        model = load_model("./Model/weather_classification_model.h5")
         # Muat class names jika tersedia
         if os.path.exists("./Model/class_names.pkl"):
             with open("./Model/class_names.pkl", 'rb') as f:
