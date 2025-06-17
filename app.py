@@ -18,6 +18,8 @@ from PIL import Image
 import pickle
 from pathlib import Path
 
+file_path = pathlib.Path(__file__).parent / "weather_classification_model.h5"
+st.write(file_path.read_text())
 # Konfigurasi halaman
 st.set_page_config(
     page_title="Weather Classification App",
