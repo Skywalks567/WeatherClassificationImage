@@ -162,6 +162,7 @@ app_mode = st.sidebar.selectbox("Pilih Mode:",
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 32
 
+@st.cache_resource
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
     try:
