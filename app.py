@@ -171,8 +171,8 @@ def load_trained_model():
         model_path = repo_top / 'Model' / 'weather_classification_model.h5'
         class_names_path = repo_top / 'Model' / 'class_names.pkl'
         st.write(model_path)
-        print("🔍 Mencoba memuat model dari:", model_path)
-        print("📁 Ada file model?", model_path.exists())
+        st.write("🔍 Mencoba memuat model dari:", model_path)
+        st.write("📁 Ada file model?", model_path.exists())
         model = load_model(model_path)
 
         if class_names_path.exists():
