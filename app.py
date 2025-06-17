@@ -166,21 +166,7 @@ BATCH_SIZE = 32
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
     try:
-        model_path = Path("Model/weather_classification_model.h5")
-        if not model_path.exists():
-            st.warning("Model tidak ditemukan, mendownload...")
-            url = "https://raw.githubusercontent.com/Skywalks567/WeatherClassificationImage/main/Model/weather_classification_model.h5"
-            
-            response = requests.get(url)
-            if response.status_code == 200:
-                model_path.parent.mkdir(parents=True, exist_ok=True)  # Pastikan folder Model/ ada
-                with open(model_path, "wb") as f:
-                    f.write(response.content)
-                st.success("Model berhasil diunduh.")
-            else:
-                st.error("Gagal mengunduh model.")
-                return None
-        model = load_model("weather_classification_model.h5")
+        model = load_model('./Model/weather_classification_model.h5')
         # Muat class names jika tersedia
         if os.path.exists('./Model/class_names.pkl'):
             with open('./Model/class_names.pkl', 'rb') as f:
