@@ -168,20 +168,22 @@ BATCH_SIZE = 32
 @st.cache_resource
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
-    repo_top = Path(__file__ + "/..").resolve()
-    print(repo_top)
+    repo_top = Path(__file__).resolve().parent
     try:
-        model = load_model(repo_top / 'weather_classification_model.h5')
-        # Muat class names jika tersedia
-        if os.path.exists("./Model/class_names.pkl"):
-            with open("./Model/class_names.pkl", 'rb') as f:
+        model_path = repo_top / 'Model' / 'weather_classification_model.h5'
+        class_names_path = repo_top / 'Model' / 'class_names.pkl'
+
+        model = load_model(model_path)
+
+        if class_names_path.exists():
+            with open(class_names_path, 'rb') as f:
                 class_names = pickle.load(f)
-            return model, class_names
         else:
-            # Default class names jika file tidak ada
             class_names = ['cloudy', 'rain', 'shine', 'sunrise']
-            return model, class_names
-    except:
+
+        return model, class_names
+    except Exception as e:
+        print(f"Error saat memuat model: {e}")
         return None, None
 
 def save_class_names(class_names):
