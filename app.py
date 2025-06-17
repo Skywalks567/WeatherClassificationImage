@@ -164,8 +164,12 @@ BATCH_SIZE = 32
 
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Gabungkan path direktori dengan nama folder dan file model
+    MODEL_PATH = os.path.join(BASE_DIR, 'Model', 'weather_classification_model.h5')
     try:
-        model = load_model('./Model/weather_classification_model.h5')
+        model = load_model(MODEL_PATH)
         # Muat class names jika tersedia
         if os.path.exists('Model/class_names.pkl'):
             with open('Model/class_names.pkl', 'rb') as f:
