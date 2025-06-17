@@ -53,7 +53,10 @@ def default_theme():
         div[data-testid="stHeading"] h1,
         div[data-testid="stHeading"] h2,
         div[data-testid="stHeading"] h3,
-        div[data-testid="stMarkdownContainer"] p {
+        div[data-testid="stMarkdownContainer"] h3,
+        div[data-testid="stMarkdownContainer"] h4,
+        div[data-testid="stMarkdownContainer"] p,
+        div[data-testid="stMarkdownContainer"] li{
             color: #1a1a1a !important; 
         }
 
@@ -162,10 +165,10 @@ BATCH_SIZE = 32
 def load_trained_model():
     """Memuat model yang sudah dilatih"""
     try:
-        model = load_model('weather_classification_model.h5')
+        model = load_model('./Model/weather_classification_model.h5')
         # Muat class names jika tersedia
-        if os.path.exists('class_names.pkl'):
-            with open('class_names.pkl', 'rb') as f:
+        if os.path.exists('./Model/class_names.pkl'):
+            with open('./Model/class_names.pkl', 'rb') as f:
                 class_names = pickle.load(f)
             return model, class_names
         else:
@@ -177,7 +180,7 @@ def load_trained_model():
 
 def save_class_names(class_names):
     """Simpan class names ke file"""
-    with open('class_names.pkl', 'wb') as f:
+    with open('./Model/class_names.pkl', 'wb') as f:
         pickle.dump(class_names, f)
 
 def create_model(num_classes):
@@ -303,7 +306,7 @@ elif app_mode == "Training Model":
     
     epochs = st.slider("Jumlah Epochs:", min_value=1, max_value=50, value=5)
     
-    if st.button("Mulai Training"):
+    if st.button("Mulai Training", type = "primary"):
         try:
             with st.spinner("Mengunduh dataset..."):
                 # Download dataset
@@ -383,7 +386,7 @@ elif app_mode == "Training Model":
                     status_text.text("Training selesai!")
                 
                 # Simpan model dan class names
-                model.save('weather_classification_model.h5')
+                model.save('./Model/weather_classification_model.h5')
                 save_class_names(class_names)
                 st.success("Model berhasil disimpan sebagai 'weather_classification_model.h5'!")
                 st.success("Class names berhasil disimpan sebagai 'class_names.pkl'!")
